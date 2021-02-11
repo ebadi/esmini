@@ -113,6 +113,12 @@ extern "C"
 
 		return 0;
 	}
+	
+	RM_DLL_API int RM_InitWithPointer(void *newOdrManager)
+	{
+		odrManager = (roadmanager::OpenDrive*) newOdrManager;
+		return 0;
+	}
 
 	RM_DLL_API int RM_Close()
 	{

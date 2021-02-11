@@ -65,6 +65,8 @@ extern "C"
 
 	RM_DLL_API int RM_Init(const char *odrFilename);
 
+ 	RM_DLL_API int RM_InitWithPointer(void *newOdrManager); 
+ 	
 	RM_DLL_API int RM_Close();
 
 	/**
