@@ -139,17 +139,17 @@ extern "C"
 		return (int)position.size();
 	}
 
-	RM_DLL_API int RM_DeletePosition(int handle)
+	RM_DLL_API int RM_DeletePosition(int posIndx)
 	{
-		if (handle == -1)
+		if (posIndx == -1)
 		{
 			// Delete all items
 			position.clear();
 		}
-		else if (handle >= 0 && handle < position.size())
+		else if (posIndx >= 0 && posIndx < position.size())
 		{
 			// Delete specific item
-			position.erase(position.begin() + handle);
+			position.erase(position.begin() + posIndx);
 		}
 		else
 		{
@@ -245,15 +245,15 @@ extern "C"
 		return 0;
 	}
 		
-	RM_DLL_API int RM_SetLanePosition(int handle, int roadId, int laneId, float laneOffset, float s, bool align)
+	RM_DLL_API int RM_SetLanePosition(int posIndx, int roadId, int laneId, float laneOffset, float s, bool align)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 		else
 		{
-			roadmanager::Position *pos = &position[handle];
+			roadmanager::Position *pos = &position[posIndx];
 			pos->SetLanePos(roadId, laneId, s, laneOffset);
 
 			if (align)
@@ -272,134 +272,134 @@ extern "C"
 		return 0;
 	}
 
-	RM_DLL_API int RM_SetWorldPosition(int handle, float x, float y, float z, float h, float p, float r)
+	RM_DLL_API int RM_SetWorldPosition(int posIndx, float x, float y, float z, float h, float p, float r)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 		else
 		{
-			roadmanager::Position *pos = &position[handle];
+			roadmanager::Position *pos = &position[posIndx];
 			pos->SetInertiaPos(x, y, z, h, p, r);
 		}
 
 		return 0;
 	}
 
-	RM_DLL_API int RM_SetWorldXYHPosition(int handle, float x, float y, float h)
+	RM_DLL_API int RM_SetWorldXYHPosition(int posIndx, float x, float y, float h)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 		else
 		{
-			roadmanager::Position *pos = &position[handle];
+			roadmanager::Position *pos = &position[posIndx];
 			pos->XYZH2TrackPos(x, y, pos->GetZ(), h, true);
 		}
 
 		return 0;
 	}
 
-	RM_DLL_API int RM_SetWorldXYZHPosition(int handle, float x, float y, float z, float h)
+	RM_DLL_API int RM_SetWorldXYZHPosition(int posIndx, float x, float y, float z, float h)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 		else
 		{
-			roadmanager::Position* pos = &position[handle];
+			roadmanager::Position* pos = &position[posIndx];
 			pos->XYZH2TrackPos(x, y, z, h, true);
 		}
 
 		return 0;
 	}
 
-	RM_DLL_API int RM_SetS(int handle, float s)
+	RM_DLL_API int RM_SetS(int posIndx, float s)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 		else
 		{
-			roadmanager::Position *pos = &position[handle];
+			roadmanager::Position *pos = &position[posIndx];
 			pos->SetLanePos(pos->GetTrackId(), pos->GetLaneId(), s, pos->GetOffset());
 		}
 
 		return 0;
 	}
 
-	RM_DLL_API int RM_PositionMoveForward(int handle, float dist, int strategy)
+	RM_DLL_API int RM_PositionMoveForward(int posIndx, float dist, int strategy)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 		else
 		{
-			roadmanager::Position *pos = &position[handle];
+			roadmanager::Position *pos = &position[posIndx];
 			
 			return(pos->MoveAlongS(dist, 0.0, (Junction::JunctionStrategyType)strategy));
 		}
 	}
 
-	RM_DLL_API int RM_GetPositionData(int handle, RM_PositionData *data)
+	RM_DLL_API int RM_GetPositionData(int posIndx, RM_PositionData *data)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 		else
 		{
-			data->x = (float)position[handle].GetX();
-			data->y = (float)position[handle].GetY();
-			data->z = (float)position[handle].GetZ();
-			data->h = (float)position[handle].GetH();
-			data->p = (float)position[handle].GetP();
-			data->r = (float)position[handle].GetR();
-			data->hRelative = (float)position[handle].GetHRelative();
-			data->roadId = position[handle].GetTrackId();
-			data->laneId = position[handle].GetLaneId();
-			data->laneOffset = (float)position[handle].GetOffset();
-			data->s = (float)position[handle].GetS();
+			data->x = (float)position[posIndx].GetX();
+			data->y = (float)position[posIndx].GetY();
+			data->z = (float)position[posIndx].GetZ();
+			data->h = (float)position[posIndx].GetH();
+			data->p = (float)position[posIndx].GetP();
+			data->r = (float)position[posIndx].GetR();
+			data->hRelative = (float)position[posIndx].GetHRelative();
+			data->roadId = position[posIndx].GetTrackId();
+			data->laneId = position[posIndx].GetLaneId();
+			data->laneOffset = (float)position[posIndx].GetOffset();
+			data->s = (float)position[posIndx].GetS();
 		}
 
 		return 0;
 	}
 
-	RM_DLL_API int RM_GetLaneInfo(int handle, float lookahead_distance, RM_RoadLaneInfo *data, int lookAheadMode)
+	RM_DLL_API int RM_GetLaneInfo(int posIndx, float lookahead_distance, RM_RoadLaneInfo *data, int lookAheadMode)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 
-		GetRoadLaneInfo(handle, lookahead_distance, data, lookAheadMode);
+		GetRoadLaneInfo(posIndx, lookahead_distance, data, lookAheadMode);
 
 		return 0;
 	}
 
-	RM_DLL_API float RM_GetSpeedLimit(int handle)
+	RM_DLL_API float RM_GetSpeedLimit(int posIndx)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 
-		return (float)position[handle].GetSpeedLimit();
+		return (float)position[posIndx].GetSpeedLimit();
 	}
 
-	RM_DLL_API int RM_GetProbeInfo(int handle, float lookahead_distance, RM_RoadProbeInfo * data, int lookAheadMode)
+	RM_DLL_API int RM_GetProbeInfo(int posIndx, float lookahead_distance, RM_RoadProbeInfo * data, int lookAheadMode)
 	{
-		if (odrManager == 0 || handle >= position.size())
+		if (odrManager == 0 || posIndx >= position.size())
 		{
 			return -1;
 		}
 
-		if (GetProbeInfo(handle, lookahead_distance, data, lookAheadMode) != 0)
+		if (GetProbeInfo(posIndx, lookahead_distance, data, lookAheadMode) != 0)
 		{
 			return -1;
 		}
@@ -407,15 +407,15 @@ extern "C"
 		return 0;
 	}
 
-	RM_DLL_API bool RM_SubtractAFromB(int handleA, int handleB, RM_PositionDiff *pos_diff)
+	RM_DLL_API bool RM_SubtractAFromB(int posIndxA, int posIndxB, RM_PositionDiff *pos_diff)
 	{
-		if (odrManager == 0 || handleA >= position.size() || handleB >= position.size())
+		if (odrManager == 0 || posIndxA >= position.size() || posIndxB >= position.size())
 		{
 			return false;
 		}
 
 		PositionDiff diff;
-		bool result = position[handleA].Delta(position[handleB], diff);
+		bool result = position[posIndxA].Delta(position[posIndxB], diff);
 		if (result == true)
 		{
 			pos_diff->ds = (float)diff.ds;
