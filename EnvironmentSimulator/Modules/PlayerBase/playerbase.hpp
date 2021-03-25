@@ -61,6 +61,7 @@ public:
 	} ObjCallback;
 
 	ScenarioPlayer(int &argc, char *argv[]);
+    ScenarioPlayer();
 	~ScenarioPlayer();
 	bool IsQuitRequested() { return quit_request; }
 	void SetOSIFileStatus(bool is_on, const char* filename = 0);
@@ -95,8 +96,8 @@ public:
 #endif
 	roadmanager::OpenDrive *odr_manager;
 	std::vector<ObjectSensor*> sensor;
-	const double maxStepSize;
-	const double minStepSize;
+	double maxStepSize;
+	double minStepSize;
 	SE_Options opt;
 	std::vector<ObjCallback> callback;
 	std::string exe_path_;
@@ -115,7 +116,8 @@ private:
 	double fixed_timestep_;
 	int osi_freq_; 
 	std::string osi_receiver_addr;
-	int& argc_;
+	int x = 10;
+	int& argc_= x ;
 	char** argv_;
 	std::string titleString;
 };
