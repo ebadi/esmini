@@ -61,7 +61,6 @@ public:
 	} ObjCallback;
 
 	ScenarioPlayer(int &argc, char *argv[]);
-    ScenarioPlayer();
 	~ScenarioPlayer();
 	bool IsQuitRequested() { return quit_request; }
 	void SetOSIFileStatus(bool is_on, const char* filename = 0);
@@ -69,7 +68,7 @@ public:
 	void Frame(double timestep_s);
 	void ScenarioFrame(double timestep_s);
 	void ShowObjectSensors(bool mode);
-	void AddObjectSensor(int object_index, double pos_x, double pos_y, double pos_z, double heading, 
+	void AddObjectSensor(int object_index, double pos_x, double pos_y, double pos_z, double heading,
 		double near, double far, double fovH, int maxObj);
 	void SetFixedTimestep(double timestep) { fixed_timestep_ = timestep; }
 	double GetFixedTimestep() { return fixed_timestep_; }
@@ -96,8 +95,8 @@ public:
 #endif
 	roadmanager::OpenDrive *odr_manager;
 	std::vector<ObjectSensor*> sensor;
-	double maxStepSize;
-	double minStepSize;
+	const double maxStepSize;
+	const double minStepSize;
 	SE_Options opt;
 	std::vector<ObjCallback> callback;
 	std::string exe_path_;
@@ -114,10 +113,9 @@ private:
 	bool launch_server;
 	bool disable_controllers_;
 	double fixed_timestep_;
-	int osi_freq_; 
+	int osi_freq_;
 	std::string osi_receiver_addr;
-	int x = 10;
-	int& argc_= x ;
+	int& argc_;
 	char** argv_;
 	std::string titleString;
 };
