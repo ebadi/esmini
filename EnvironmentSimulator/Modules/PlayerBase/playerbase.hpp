@@ -60,6 +60,7 @@ public:
 		void* data;
 	} ObjCallback;
 
+    //ScenarioPlayer();
 	ScenarioPlayer(int &argc, char *argv[]);
 	~ScenarioPlayer();
 	bool IsQuitRequested() { return quit_request; }
@@ -95,8 +96,8 @@ public:
 #endif
 	roadmanager::OpenDrive *odr_manager;
 	std::vector<ObjectSensor*> sensor;
-	const double maxStepSize;
-	const double minStepSize;
+	double maxStepSize;
+	double minStepSize;
 	SE_Options opt;
 	std::vector<ObjCallback> callback;
 	std::string exe_path_;
@@ -115,7 +116,7 @@ private:
 	double fixed_timestep_;
 	int osi_freq_;
 	std::string osi_receiver_addr;
-	int& argc_;
+	int argc_;
 	char** argv_;
 	std::string titleString;
 };

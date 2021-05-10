@@ -34,6 +34,8 @@ static void log_callback(const char *str)
 	printf("%s\n", str);
 }
 
+//ScenarioPlayer::ScenarioPlayer() {}
+
 ScenarioPlayer::ScenarioPlayer(int &argc, char *argv[]) :
 	maxStepSize(0.1), minStepSize(0.01), argc_(argc), argv_(argv)
 {
@@ -87,7 +89,7 @@ ScenarioPlayer::~ScenarioPlayer()
 	}
 #endif
 	Logger::Inst().SetTimePtr(0);
-	delete scenarioEngine; 
+	//delete scenarioEngine;
 
 	if (osiReporter)
 	{
