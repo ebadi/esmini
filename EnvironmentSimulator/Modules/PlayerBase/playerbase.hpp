@@ -60,7 +60,7 @@ public:
 		void* data;
 	} ObjCallback;
 
-    ScenarioPlayer();
+    ScenarioPlayer(const std::string &name, int hunger) ;
 	ScenarioPlayer(int &argc, char *argv[]);
 	~ScenarioPlayer();
 	bool IsQuitRequested() { return quit_request; }
@@ -102,9 +102,11 @@ public:
 	std::vector<ObjCallback> callback;
 	std::string exe_path_;
 
+    std::string name;
+    int hunger;
+
 private:
 	int Init();
-
 	double trail_dt;
 	SE_Thread thread;
 	SE_Mutex mutex;

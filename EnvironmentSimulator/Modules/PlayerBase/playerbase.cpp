@@ -34,7 +34,8 @@ static void log_callback(const char *str)
 	printf("%s\n", str);
 }
 
-ScenarioPlayer::ScenarioPlayer() {}
+ScenarioPlayer::ScenarioPlayer(const std::string &name, int hunger) : name(name), hunger(hunger) {}
+
 
 ScenarioPlayer::ScenarioPlayer(int &argc, char *argv[]) :
 	maxStepSize(0.1), minStepSize(0.01), argc_(argc), argv_(argv)
