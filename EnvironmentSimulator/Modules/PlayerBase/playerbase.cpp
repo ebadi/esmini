@@ -34,12 +34,16 @@ static void log_callback(const char *str)
 	printf("%s\n", str);
 }
 
-ScenarioPlayer::ScenarioPlayer(const std::string &name, int hunger) : name(name), hunger(hunger) {}
+ScenarioPlayer::ScenarioPlayer(const std::string &name, int hunger)
+{
+	printf("\nConstructor1\n");
+}
 
 
 ScenarioPlayer::ScenarioPlayer(int &argc, char *argv[]) :
 	maxStepSize(0.1), minStepSize(0.01), argc_(argc), argv_(argv)
 {
+	printf("\nConstructor2\n");
 	quit_request = false;
 	threads = false;
 	headless = false;
@@ -67,6 +71,7 @@ ScenarioPlayer::ScenarioPlayer(int &argc, char *argv[]) :
 
 ScenarioPlayer::~ScenarioPlayer()
 {
+	printf("\nDestructor\n");
 	if (launch_server)
 	{
 		StopServer();
