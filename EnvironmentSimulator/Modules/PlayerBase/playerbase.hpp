@@ -60,7 +60,7 @@ public:
 		void* data;
 	} ObjCallback;
 
-    ScenarioPlayer(const std::string &name, int hunger) ;
+    ScenarioPlayer(int hunger) ;
 	ScenarioPlayer(int &argc, char *argv[]);
 	~ScenarioPlayer();
 	bool IsQuitRequested() { return quit_request; }

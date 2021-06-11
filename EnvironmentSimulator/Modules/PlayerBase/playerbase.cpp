@@ -34,7 +34,7 @@ static void log_callback(const char *str)
 	printf("%s\n", str);
 }
 
-ScenarioPlayer::ScenarioPlayer(const std::string &name, int hunger)
+ScenarioPlayer::ScenarioPlayer(int hunger)
 {
 	printf("\nConstructor1\n");
 }
